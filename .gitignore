@@ -3,6 +3,7 @@
 /.classpath
 tmp
 logs
+
 /out
 /.settings
 *.DS_Store
