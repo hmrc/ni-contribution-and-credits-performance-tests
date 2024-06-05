@@ -3,15 +3,22 @@
  *
  */
 
-package uk.gov.hmrc.perftests.example
+package uk.gov.hmrc.perftests.nicc
 
 import io.gatling.core.Predef._
 import io.gatling.http.Predef._
 import io.gatling.http.request.builder.HttpRequestBuilder
 import uk.gov.hmrc.performance.conf.ServicesConfiguration
 
-object ExampleRequests extends ServicesConfiguration {
+object NICCRequests extends ServicesConfiguration {
 
+  val bearerToken: String = readProperty("bearerToken", "${authBearerToken}")
+
+  val baseUrl: String = baseUrlFor("nicc") + "/individuals/tax-free-childcare/payments"
+
+  lazy val authBaseUrl: String = baseUrlFor("auth-login-api")
+
+  lazy val authUrl: String = s"$authBaseUrl/government-gateway/session/login"
   val baseUrl: String = baseUrlFor("example-frontend")
   val route: String   = "/check-your-vat-flat-rate"
 
