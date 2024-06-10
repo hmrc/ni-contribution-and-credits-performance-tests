@@ -1,2 +1,2 @@
-vatReturnPeriod
-annually
+dateOfBirth,nationalInsuranceNumber,startTaxYear,endTaxYear
+1960-04-05, SS000200, 2019, 2021
