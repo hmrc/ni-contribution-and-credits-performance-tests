@@ -29,6 +29,7 @@ object NICCRequests extends ServicesConfiguration {
   val startTaxYear: String   = "2019-10-01"
   val endTaxYear: String     = "2023-10-31"
 
+
   def postNICC: ChainBuilder =
     exec(
       http("Get niContribution and niCredit for NI number, start tax year date and end tax year date")
