@@ -19,7 +19,6 @@ package uk.gov.hmrc.perftests.nicc
 import io.gatling.core.Predef._
 import io.gatling.core.structure.ScenarioBuilder
 import uk.gov.hmrc.performance.simulation.{Journey, JourneySetup}
-import uk.gov.hmrc.perftests.Scenarios
 
 import scala.concurrent.duration._
 
