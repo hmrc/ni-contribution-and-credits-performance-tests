@@ -13,17 +13,10 @@ object NICCRequests extends ServicesConfiguration {
   val baseUrl: String = baseUrlFor("nicc")
 
   val niccRequestBody: String = Json.obj(
-    "nino" -> "AA111111A",
-    "gender" -> "M",
-    "checkBrick" -> "SMIJ",
-    "finalise" -> false
-  ).toString()
-
-  val finalCalcRequestBody: String = Json.obj(
-    "nino" -> "AA123456A",
-    "gender" -> "M",
-    "checkBrick" -> "SMIJ",
-    "finalise" -> true
+    "dateOfBirth" -> "1981-08-24",
+    "nino" -> "BB000200B",
+    "startTaxYear" -> "2020",
+    "endTaxYear" -> "2024",
   ).toString()
 
   val headers: Map[String, String] = Map(
@@ -31,12 +24,12 @@ object NICCRequests extends ServicesConfiguration {
     "CorrelationId" -> UUID.randomUUID().toString
   )
 
-  val callInitialCalculation: HttpRequestBuilder =
-    http("Calls the calculation endpoint with an initial calc payload")
+  val callnicc: HttpRequestBuilder =
+    http("Calls the nicc endpoint with payload")
       .post(s"$baseUrl/calculation")
-      .body(StringBody(initialCalcRequestBody))
+      .body(StringBody(niccRequestBody))
       .headers(headers)
-      .check(status.is(201))
+      .check(status.is(200))
 
   val callFinalCalculation: HttpRequestBuilder =
     http("Calls the calculation endpoint with an final calc payload")
