@@ -15,14 +15,17 @@
  */
 
 package uk.gov.hmrc.perftests.nicc
-
 import io.gatling.core.Predef._
 import io.gatling.core.structure.ScenarioBuilder
 import uk.gov.hmrc.performance.simulation.{Journey, JourneySetup}
+//import uk.gov.hmrc.performance.simulation.PerformanceTestRunner
+
+import uk.gov.hmrc.perftests.nicc.NICCRequests._
 
 import scala.concurrent.duration._
 
 class NICCSimulation extends Simulation with JourneySetup {
+//class NICCSimulation extends PerformanceTestRunner {
 
   val scenarioDefinitions: Seq[ScenarioDefinition] =
     Seq(
