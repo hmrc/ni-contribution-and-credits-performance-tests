@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.perftests.nicc
+/*package uk.gov.hmrc.perftests.nicc
 
 import io.gatling.core.Predef.scenario
 import uk.gov.hmrc.perftests.nicc.NICCRequests.postNICC
@@ -29,4 +29,4 @@ package object Scenarios {
       )
     ScenarioDefinition(nicc, load)
   }
-}
+}*/
