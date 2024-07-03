@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package uk.gov.hmrc.perftests.nicc
 import io.gatling.core.Predef._
 import io.gatling.core.structure.ChainBuilder
