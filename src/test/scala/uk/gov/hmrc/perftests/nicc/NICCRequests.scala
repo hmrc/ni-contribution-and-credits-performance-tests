@@ -24,18 +24,18 @@ import uk.gov.hmrc.performance.conf.ServicesConfiguration
 object NICCRequests extends ServicesConfiguration {
 
   val baseUrl: String = baseUrlFor("nicc")
-  val postNiccUrl: String = "nicc-json-service/v1/api/national-insurance"
-  val nationalInsuranceNumber: String = "BB000200B"
+  val postNiccUrl: String = "nicc-json-service/v1/api/contribution-and-credits"
+  //val nationalInsuranceNumber: String = "BB000200B"
   val startTaxYear: String = "2019"
   val endTaxYear: String = "2023"
 
-  val niccRequestBody: String = "{  \"dateOfBirth\": \"1960-04-05\" }".stripMargin
+  val niccRequestBody: String = "{  \"dateOfBirth\": \"1960-04-05\" ,\"nationalInsuranceNumber\": \"BB000200B\" ,\"customerCorrelationID\": \"e470d658-99f7-4292-a4a1-ed12c72f1337\"}".stripMargin
 
 
   def postNICC: ChainBuilder = {
     exec(
       http("Get niContribution and niCredit for NI number, start tax year date and end tax year date")
-        .post(s"$baseUrl/$postNiccUrl/$nationalInsuranceNumber/from/$startTaxYear/to/$endTaxYear")
+        .post(s"$baseUrl/$postNiccUrl/from/$startTaxYear/to/$endTaxYear")
         .header("Content-Type", "application/json")
         .body(StringBody(niccRequestBody))
         .check(status.is(200))
