@@ -54,7 +54,7 @@ trait CommonUtils extends ServicesConfiguration with HttpClient {
     val tokenEndpoint = s"http://localhost:8470/test-only/token"
     val tokenResult = Await.result(stubDataForPost(tokenEndpoint, tokenJsonRequest), 10.seconds)
 
-    tokenResult.status should not be (400)
+    tokenResult.status should not be 400
     token
   }
 
