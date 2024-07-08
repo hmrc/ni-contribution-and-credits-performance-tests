@@ -55,12 +55,7 @@ object JWTRequest extends ServicesConfiguration {
               "principal"   -> "test",
               "permissions" -> Seq(
                 Json.obj(
-                  "resourceType"     -> "signal-transmitter",
-                  "resourceLocation" -> "*",
-                  "actions"          -> List("*")
-                ),
-                Json.obj(
-                  "resourceType"     -> "signal-processor",
+                  "resourceType"     -> "nicc",
                   "resourceLocation" -> "*",
                   "actions"          -> List("*")
                 )
