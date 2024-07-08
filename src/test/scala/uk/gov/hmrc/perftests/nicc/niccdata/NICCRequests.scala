@@ -14,12 +14,13 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.perftests.nicc
+package uk.gov.hmrc.perftests.nicc.niccdata
 
 import io.gatling.core.Predef._
-import io.gatling.core.structure.ChainBuilder
 import io.gatling.http.Predef._
+import io.gatling.http.request.builder.HttpRequestBuilder
 import uk.gov.hmrc.performance.conf.ServicesConfiguration
+import uk.gov.hmrc.perftests.nicc.JWTRequest
 
 object NICCRequests extends ServicesConfiguration {
 
@@ -31,14 +32,17 @@ object NICCRequests extends ServicesConfiguration {
 
   val niccRequestBody: String = "{  \"dateOfBirth\": \"1960-04-05\" }".stripMargin
 
+  val requestHeaders: Map[CharSequence, String] = Map(
+    HttpHeaderNames.ContentType -> "application/json",
+    "Authorization"             -> JWTRequest.internalToken
+  )
 
-  def postNICC: ChainBuilder = {
-    exec(
+
+  val niccRequest: HttpRequestBuilder = {
       http("Get niContribution and niCredit for NI number, start tax year date and end tax year date")
         .post(s"$baseUrl/$postNiccUrl/$nationalInsuranceNumber/from/$startTaxYear/to/$endTaxYear")
         .header("Content-Type", "application/json")
         .body(StringBody(niccRequestBody))
         .check(status.is(200))
-    )
   }
 }
