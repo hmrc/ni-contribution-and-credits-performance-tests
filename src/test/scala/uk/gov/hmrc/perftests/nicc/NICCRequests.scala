@@ -24,12 +24,12 @@ import uk.gov.hmrc.performance.conf.ServicesConfiguration
 object NICCRequests extends ServicesConfiguration {
 
   val baseUrl: String = baseUrlFor("nicc")
-  val postNiccUrl: String = "nicc-json-service/v1/api/contribution-and-credits"
-  //val nationalInsuranceNumber: String = "BB000200B"
+  val postNiccUrl: String = "/nicc-json-service/v1/api/contribution-and-credits/"
+  val nationalInsuranceNumber: String = "BB000200B"
   val startTaxYear: String = "2019"
   val endTaxYear: String = "2023"
 
-  val niccRequestBody: String = "{  \"dateOfBirth\": \"1960-04-05\" ,\"nationalInsuranceNumber\": \"BB000200B\" ,\"customerCorrelationID\": \"e470d658-99f7-4292-a4a1-ed12c72f1337\"}".stripMargin
+  val niccRequestBody: String = s"{ \"nationalInsuranceNumber\": \"$nationalInsuranceNumber\", \"dateOfBirth\": \"1960-04-05\",  \"customerCorrelationId\": \"fbb53666-469c-4d36-8e6d-151ef3c424e1\" }".stripMargin
 
 
   def postNICC: ChainBuilder = {

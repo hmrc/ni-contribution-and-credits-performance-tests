@@ -48,7 +48,7 @@ class NICCSimulation extends Simulation with JourneySetup {
 }
 
 case class ScenarioDefinition(builder: ScenarioBuilder, load: Double) extends Journey {
-  def this(scenarioBuilder: ScenarioBuilder) {
+  def this(scenarioBuilder: ScenarioBuilder) = {
     this(scenarioBuilder, 1.0)
   }
 }
