@@ -37,6 +37,7 @@ object NICCRequests extends ServicesConfiguration {
       http("Get niContribution and niCredit for NI number, start tax year date and end tax year date")
         .post(s"$baseUrl/$postNiccUrl/from/$startTaxYear/to/$endTaxYear")
         .header("Content-Type", "application/json")
+        .header("Authorization", "Bearer <token>")
         .body(StringBody(niccRequestBody))
         .check(status.is(200))
     )
