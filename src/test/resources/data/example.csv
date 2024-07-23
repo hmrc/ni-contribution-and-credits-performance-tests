@@ -1,2 +1,2 @@
-dateOfBirth,nationalInsuranceNumber,startTaxYear,endTaxYear
-1960-04-05, BB000200B, 2019, 2021
+dateOfBirth,nationalInsuranceNumber,customerCorrelationID,startTaxYear,endTaxYear
+1960-04-05, BB000200B, e470d658-99f7-4292-a4a1-ed12c72f1337, 2019, 2021
