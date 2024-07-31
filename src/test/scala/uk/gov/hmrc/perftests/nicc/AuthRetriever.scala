@@ -32,7 +32,7 @@ object AuthRetriever extends ServicesConfiguration {
   val wsClient: StandaloneAhcWSClient = StandaloneAhcWSClient()
 
   private val authApiBaseUrl: String = baseUrlFor("auth-login-api")
-  private val authApiUrl: String = s"$authApiBaseUrl/government-gateway/session/login"
+  private val authApiUrl: String = s"$authApiBaseUrl/application/session/login"
 
   def getAuthToken: String = {
     val response = Await.result(
@@ -40,23 +40,12 @@ object AuthRetriever extends ServicesConfiguration {
         .url(authApiUrl)
         .post(
           Json.obj(
-            "affinityGroup"       -> "Organisation",
-            "credentialStrength"  -> "strong",
-            "confidenceLevel"     -> 50,
-            "credentialRole"      -> "Admin",
-            "credId"              -> UUID.randomUUID().toString/*,
-            "enrolments"         -> Seq( //incorrect enrolment,
-              Json.obj(
-                "key"         -> "HMRC-CUS-ORG",
-                "identifiers" -> Seq(
-                  Json.obj(
-                    "key"   -> "EORINumber",
-                    "value" -> "GB12938122"
-                  )
-                ),
-                "state"       -> "Activated"
-              )
-            )*/
+            "clientId"        -> "e4419866-68c3-4f4d-b747-61e074fe7fe0",
+            "authProvider"    -> "PrivilegedApplication",
+            "applicationId"   -> "d1a5d6cb-2b18-420d-bf3c-d7b1492389fe",
+            "applicationName" -> "national-insurance-contribution-and-credits-api",
+            "enrolments"      -> "[]",
+            "ttl" -> 5000
           )
         ),
       5.seconds
