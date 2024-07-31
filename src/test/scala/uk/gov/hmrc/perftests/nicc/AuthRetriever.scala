@@ -23,7 +23,6 @@ import play.api.libs.ws.JsonBodyWritables.writeableOf_JsValue
 import play.api.libs.ws.ahc.StandaloneAhcWSClient
 import uk.gov.hmrc.performance.conf.ServicesConfiguration
 
-import java.util.UUID
 import scala.concurrent.Await
 import scala.concurrent.duration.DurationInt
 
@@ -44,7 +43,7 @@ object AuthRetriever extends ServicesConfiguration {
             "authProvider"    -> "PrivilegedApplication",
             "applicationId"   -> "d1a5d6cb-2b18-420d-bf3c-d7b1492389fe",
             "applicationName" -> "national-insurance-contribution-and-credits-api",
-            "enrolments"      -> "[]",
+            "enrolments"      -> Json.arr(),
             "ttl" -> 5000
           )
         ),
