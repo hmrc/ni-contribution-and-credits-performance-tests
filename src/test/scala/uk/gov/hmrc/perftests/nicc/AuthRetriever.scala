@@ -50,8 +50,6 @@ object AuthRetriever extends ServicesConfiguration {
       5.seconds
     )
 
-
-    println(s"\n\nThe response status is ${response.status} and the body says: ${response.body}. \nHeaders include: ${response.headers}\n\n")
     require(response.status == 201, "Unable to create auth token")
 
     response.headers

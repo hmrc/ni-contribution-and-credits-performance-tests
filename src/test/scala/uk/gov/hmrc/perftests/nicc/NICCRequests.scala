@@ -39,12 +39,11 @@ object NICCRequests extends ServicesConfiguration {
     s"}".stripMargin
 
   def postNICC: ChainBuilder = {
-    println(s"Token being used is : $token")
     exec(
       http("Get niContribution and niCredit for NI number, start tax year date and end tax year date")
         .post(s"$baseUrl/$postNiccUrl")
         .header("Content-Type", "application/json")
-        .header("Authorization", s"Bearer $token")
+        .header("Authorization", s"$token")
         .body(StringBody(niccRequestBody))
         .check(status.is(200))
     )
