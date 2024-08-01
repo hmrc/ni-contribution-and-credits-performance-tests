@@ -28,15 +28,22 @@ object NICCRequests extends ServicesConfiguration {
   val nationalInsuranceNumber: String = "BB000200B"
   val startTaxYear: String = "2019"
   val endTaxYear: String = "2023"
+  val token: String = AuthRetriever.getAuthToken
 
-  val niccRequestBody: String = s"{ \"nationalInsuranceNumber\": \"$nationalInsuranceNumber\", \"dateOfBirth\": \"1960-04-05\",  \"customerCorrelationId\": \"fbb53666-469c-4d36-8e6d-151ef3c424e1\", \"startTaxYear\": \"$startTaxYear\",  \"endTaxYear\": \"$endTaxYear\"  }".stripMargin
+  val niccRequestBody: String = s"{" +
+    s" \"nationalInsuranceNumber\": \"$nationalInsuranceNumber\", " +
+    s"\"dateOfBirth\": \"1960-04-05\",  " +
+    s"\"customerCorrelationId\": \"fbb53666-469c-4d36-8e6d-151ef3c424e1\", " +
+    s"\"startTaxYear\": \"$startTaxYear\",  " +
+    s"\"endTaxYear\": \"$endTaxYear\"  " +
+    s"}".stripMargin
 
   def postNICC: ChainBuilder = {
     exec(
       http("Get niContribution and niCredit for NI number, start tax year date and end tax year date")
         .post(s"$baseUrl/$postNiccUrl")
         .header("Content-Type", "application/json")
-        .header("Authorization", "Bearer <token>")
+        .header("Authorization", s"$token")
         .body(StringBody(niccRequestBody))
         .check(status.is(200))
     )
