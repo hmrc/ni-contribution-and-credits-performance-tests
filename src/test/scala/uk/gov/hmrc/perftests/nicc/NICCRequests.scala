@@ -33,7 +33,7 @@ object NICCRequests extends ServicesConfiguration {
   val niccRequestBody: String = s"{" +
     s" \"nationalInsuranceNumber\": \"$nationalInsuranceNumber\", " +
     s"\"dateOfBirth\": \"1960-04-05\",  " +
-    s"\"customerCorrelationId\": \"fbb53666-469c-4d36-8e6d-151ef3c424e1\", " +
+    s"\"customerCorrelationID\": \"fbb53666-469c-4d36-8e6d-151ef3c424e1\", " +
     s"\"startTaxYear\": \"$startTaxYear\",  " +
     s"\"endTaxYear\": \"$endTaxYear\"  " +
     s"}".stripMargin
