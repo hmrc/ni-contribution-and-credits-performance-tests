@@ -23,12 +23,12 @@ import uk.gov.hmrc.performance.conf.ServicesConfiguration
 
 object NICCRequests extends ServicesConfiguration {
 
-  val baseUrl: String = baseUrlFor("nicc")
-  val postNiccUrl: String = "/contribution-and-credits"
+  val baseUrl: String                 = baseUrlFor("nicc")
+  val postNiccUrl: String             = "/contribution-and-credits"
   val nationalInsuranceNumber: String = "BB000200B"
-  val startTaxYear: String = "2019"
-  val endTaxYear: String = "2023"
-  val token: String = AuthRetriever.getAuthToken
+  val startTaxYear: String            = "2019"
+  val endTaxYear: String              = "2023"
+  val token: String                   = AuthRetriever.getAuthToken
 
   val niccRequestBody: String = s"{" +
     s" \"nationalInsuranceNumber\": \"$nationalInsuranceNumber\", " +
@@ -38,7 +38,7 @@ object NICCRequests extends ServicesConfiguration {
     s"\"endTaxYear\": \"$endTaxYear\"  " +
     s"}".stripMargin
 
-  def postNICC: ChainBuilder = {
+  def postNICC: ChainBuilder =
     exec(
       http("Get niContribution and niCredit for NI number, start tax year date and end tax year date")
         .post(s"$baseUrl/$postNiccUrl")
@@ -47,5 +47,5 @@ object NICCRequests extends ServicesConfiguration {
         .body(StringBody(niccRequestBody))
         .check(status.is(200))
     )
-  }
+
 }

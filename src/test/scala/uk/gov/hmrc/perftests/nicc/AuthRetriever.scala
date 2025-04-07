@@ -28,10 +28,10 @@ import scala.concurrent.duration.DurationInt
 
 object AuthRetriever extends ServicesConfiguration {
   private implicit val system: ActorSystem = ActorSystem()
-  val wsClient: StandaloneAhcWSClient = StandaloneAhcWSClient()
+  val wsClient: StandaloneAhcWSClient      = StandaloneAhcWSClient()
 
   private val authApiBaseUrl: String = baseUrlFor("auth-login-api")
-  private val authApiUrl: String = s"$authApiBaseUrl/application/session/login"
+  private val authApiUrl: String     = s"$authApiBaseUrl/application/session/login"
 
   def getAuthToken: String = {
     val response = Await.result(
@@ -44,7 +44,7 @@ object AuthRetriever extends ServicesConfiguration {
             "applicationId"   -> "d1a5d6cb-2b18-420d-bf3c-d7b1492389fe",
             "applicationName" -> "national-insurance-contribution-and-credits-api",
             "enrolments"      -> Json.arr(),
-            "ttl" -> 5000
+            "ttl"             -> 5000
           )
         ),
       5.seconds

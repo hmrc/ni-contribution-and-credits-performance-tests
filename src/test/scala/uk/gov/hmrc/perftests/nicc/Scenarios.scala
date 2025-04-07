@@ -22,11 +22,12 @@ import uk.gov.hmrc.perftests.nicc.NICCRequests.postNICC
 package object Scenarios {
 
   def niccJourney(smokeTest: Boolean): ScenarioDefinition = {
-    val load   = 1
+    val load = 1
     val nicc = scenario("Retrieve niContribution,niCredit for ni number , Start tax year Date and End tax year Date")
       .exec(
         postNICC
       )
     ScenarioDefinition(nicc, load)
   }
+
 }
