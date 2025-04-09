@@ -33,22 +33,22 @@ class NICCSimulation extends Simulation with JourneySetup {
 
   if (runSingleUserJourney) {
     println(s"'perftest.runSmokeTest' is set to true, ignoring all loads and running with only one user per journey!")
-    val injectedBuilders = scenarioDefinitions.map { scenarioDefinition =>
-      scenarioDefinition.builder.inject(atOnceUsers(1))
-    }
+    val injectedBuilders =
+      scenarioDefinitions.map(scenarioDefinition => scenarioDefinition.builder.inject(atOnceUsers(1)))
 
     setUp(injectedBuilders: _*)
       .assertions(global.failedRequests.count.is(0))
   } else {
     setUp(withInjectedLoad(scenarioDefinitions): _*)
       .assertions(global.failedRequests.percent.lte(1))
-      .maxDuration(10 minutes)
+      .maxDuration(10.minutes)
   }
 
 }
 
 case class ScenarioDefinition(builder: ScenarioBuilder, load: Double) extends Journey {
-  def this(scenarioBuilder: ScenarioBuilder) = {
+
+  def this(scenarioBuilder: ScenarioBuilder) =
     this(scenarioBuilder, 1.0)
-  }
+
 }
