@@ -29,10 +29,10 @@ class NICCSimulation extends Simulation with JourneySetup {
       Scenarios.niccJourney(runSingleUserJourney)
     )
 
-  println(s"Setting up simulation")
+  println("Setting up simulation")
 
   if (runSingleUserJourney) {
-    println(s"'perftest.runSmokeTest' is set to true, ignoring all loads and running with only one user per journey!")
+    println("'perftest.runSmokeTest' is set to true, ignoring all loads and running with only one user per journey!")
     val injectedBuilders =
       scenarioDefinitions.map(scenarioDefinition => scenarioDefinition.builder.inject(atOnceUsers(1)))
 
