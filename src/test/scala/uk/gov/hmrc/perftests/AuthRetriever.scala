@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.perftests.benefitEligibilityData
+package uk.gov.hmrc.perftests
 
 import io.gatling.http.HeaderNames.Authorization
 import org.apache.pekko.actor.ActorSystem
@@ -28,10 +28,10 @@ import scala.concurrent.duration.DurationInt
 
 object AuthRetriever extends ServicesConfiguration {
   private implicit val system: ActorSystem = ActorSystem()
-  val wsClient: StandaloneAhcWSClient = StandaloneAhcWSClient()
+  val wsClient: StandaloneAhcWSClient      = StandaloneAhcWSClient()
 
   private val authApiBaseUrl: String = baseUrlFor("auth-login-api")
-  private val authApiUrl: String = s"$authApiBaseUrl/application/session/login"
+  private val authApiUrl: String     = s"$authApiBaseUrl/application/session/login"
 
   def getAuthToken: String = {
     val response = Await.result(
@@ -39,12 +39,12 @@ object AuthRetriever extends ServicesConfiguration {
         .url(authApiUrl)
         .post(
           Json.obj(
-            "clientId" -> "e4419866-68c3-4f4d-b747-61e074fe7fe0",
-            "authProvider" -> "PrivilegedApplication",
-            "applicationId" -> "d1a5d6cb-2b18-420d-bf3c-d7b1492389fe",
+            "clientId"        -> "e4419866-68c3-4f4d-b747-61e074fe7fe0",
+            "authProvider"    -> "PrivilegedApplication",
+            "applicationId"   -> "d1a5d6cb-2b18-420d-bf3c-d7b1492389fe",
             "applicationName" -> "national-insurance-contribution-and-credits-api",
-            "enrolments" -> Json.arr(),
-            "ttl" -> 5000
+            "enrolments"      -> Json.arr(),
+            "ttl"             -> 5000
           )
         ),
       5.seconds

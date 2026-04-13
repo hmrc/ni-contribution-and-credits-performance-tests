@@ -1,5 +1,5 @@
 /*
- * Copyright 2026 HM Revenue & Customs
+ * Copyright 2024 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,18 +14,16 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.perftests.benefitEligibilityData
+package uk.gov.hmrc.perftests
 
 import io.gatling.core.Predef._
-import io.gatling.core.structure.ScenarioBuilder
-import uk.gov.hmrc.performance.simulation.{Journey, JourneySetup}
-import uk.gov.hmrc.perftests.Scenarios
+import uk.gov.hmrc.performance.simulation.JourneySetup
 
 import scala.concurrent.duration._
 
-class BenefitEligibilityDataSimulation extends Simulation with JourneySetup {
+class ApiUsageSimulation extends Simulation with JourneySetup {
 
-  val scenarioDefinitions: Seq[ScenarioDefinition] =
+  val benefitEligibilityApiScenarioDefinitions: Seq[ScenarioDefinition] =
     Seq(
       Scenarios.jsaBenefitEligibilityDataJourney(runSingleUserJourney),
       Scenarios.esaBenefitEligibilityDataJourney(runSingleUserJourney),
@@ -36,25 +34,29 @@ class BenefitEligibilityDataSimulation extends Simulation with JourneySetup {
       Scenarios.bspBenefitEligibilityDataPaginationJourney(runSingleUserJourney),
       Scenarios.gyspBenefitEligibilityDataPaginationJourney(runSingleUserJourney),
       Scenarios.maBenefitEligibilityDataPaginationJourney(runSingleUserJourney)
-    ) ++ Scenarios.paginationBenefitEligibilityDataUnderLoadJourney(runSingleUserJourney) ++ Scenarios.underLoadBenefitEligibilityDataJourney(runSingleUserJourney)
+    ) ++ Scenarios.paginationBenefitEligibilityDataUnderLoadJourney(runSingleUserJourney) ++ Scenarios
+      .underLoadBenefitEligibilityDataJourney(runSingleUserJourney)
 
+  val niccScenarioDefinitions: Seq[ScenarioDefinition] =
+    Seq(
+      Scenarios.niccJourney(runSingleUserJourney)
+    )
+
+  println("Setting up simulation")
 
   if (runSingleUserJourney) {
     println("'perftest.runSmokeTest' is set to true, ignoring all loads and running with only one user per journey!")
     val injectedBuilders =
-      scenarioDefinitions.map(scenarioDefinition => scenarioDefinition.builder.inject(atOnceUsers(1)))
+      (niccScenarioDefinitions ++ benefitEligibilityApiScenarioDefinitions).map(scenarioDefinition =>
+        scenarioDefinition.builder.inject(atOnceUsers(1))
+      )
 
     setUp(injectedBuilders: _*)
       .assertions(global.failedRequests.count.is(0))
   } else {
-    setUp(withInjectedLoad(scenarioDefinitions): _*)
+    setUp(withInjectedLoad(niccScenarioDefinitions ++ benefitEligibilityApiScenarioDefinitions): _*)
       .assertions(global.failedRequests.percent.lte(1))
       .maxDuration(10.minutes)
   }
-}
 
-case class ScenarioDefinition(builder: ScenarioBuilder, load: Double) extends Journey {
-
-  def this(scenarioBuilder: ScenarioBuilder) =
-    this(scenarioBuilder, 1.0)
 }

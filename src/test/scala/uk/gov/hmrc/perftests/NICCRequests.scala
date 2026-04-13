@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.perftests.nicc
+package uk.gov.hmrc.perftests
 
 import io.gatling.core.Predef._
 import io.gatling.core.structure.ChainBuilder
