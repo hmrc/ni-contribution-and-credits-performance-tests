@@ -36,7 +36,8 @@ class BenefitEligibilityDataSimulation extends Simulation with JourneySetup {
       Scenarios.bspBenefitEligibilityDataPaginationJourney(runSingleUserJourney),
       Scenarios.gyspBenefitEligibilityDataPaginationJourney(runSingleUserJourney),
       Scenarios.maBenefitEligibilityDataPaginationJourney(runSingleUserJourney)
-    ) ++ Scenarios.paginationBenefitEligibilityDataUnderLoadJourney(runSingleUserJourney) ++ Scenarios.underLoadBenefitEligibilityDataJourney(runSingleUserJourney)
+    )
+//  ++ Scenarios.paginationBenefitEligibilityDataUnderLoadJourney(runSingleUserJourney) ++ Scenarios.underLoadBenefitEligibilityDataJourney(runSingleUserJourney)
 
 
   if (runSingleUserJourney) {
