@@ -78,7 +78,7 @@ object Scenarios {
     val load = 2
     val benefitEligibilityData = scenario("Fetch GYSP and return")
       .exec(
-        postBenefitEligibilityDataRequest("BSP", gyspRequestBody)
+        postBenefitEligibilityDataRequest("GYSP", gyspRequestBody)
       )
     ScenarioDefinition(benefitEligibilityData, load)
   }
@@ -148,7 +148,7 @@ object Scenarios {
     val load = 2
     val benefitEligibilityData = scenario("Fetch GYSP pagination and return")
       .exec(
-        paginationRequest("GYSP", gyspRequestBody)
+        paginationRequest("GYSP", gyspRequestWithPagination)
       )
     ScenarioDefinition(benefitEligibilityData, load)
   }
