@@ -151,34 +151,51 @@ object BenefitEligibilityDataRequests extends ServicesConfiguration {
        |  }
        |}""".stripMargin
 
-  def postBenefitEligibilityDataRequest(benefitType: String, request: String): ChainBuilder =
+  def OriginatorId(requestType: String): String =
+    getOriginatorId(requestType).getOrElse("N/A")
+
+  def postBenefitEligibilityDataRequest(requestType: String, request: String): ChainBuilder =
     exec(
-      http(s"POST /benefit-eligibility-info '$benefitType' - without pagination")
+      http(s"POST /benefit-eligibility-info '$requestType' - without pagination")
         .post(s"$baseUrl/$postBenefitEligibilityDataUrl")
         .header("Content-Type", "application/json")
         .header("Authorization", s"$token")
         .header("CorrelationId", "eba473d1-c34b-498d-925f-af8d2514fa92")
+        .header("gov-uk-originator-id", OriginatorId(requestType))
         .body(StringBody(request))
         .check(status.is(200))
     )
 
-  def paginationRequest(benefitType: String, request: String): ChainBuilder =
+  def paginationRequest(requestType: String, request: String): ChainBuilder =
     exec(
-      http(s"POST /benefit-eligibility-info '$benefitType' - pagination initial fetch")
+      http(s"POST /benefit-eligibility-info '$requestType' - pagination initial fetch")
         .post(s"$baseUrl/$postBenefitEligibilityDataUrl")
         .header("Content-Type", "application/json")
         .header("Authorization", s"$token")
         .header("CorrelationId", "47205584-6403-47c0-97ab-88e9e115a58e")
+        .header("gov-uk-originator-id", OriginatorId(requestType))
         .body(StringBody(request))
         .check(status.is(200))
         .check(jsonPath("$.nextCursor").saveAs("nextCursor"))
     ).exec(
-      http(s"GET /benefit-eligibility-info '$benefitType' - pagination fetch remaining data")
+      http(s"GET /benefit-eligibility-info '$requestType' - pagination fetch remaining data")
         .get(session => s"$baseUrl/$getPaginateUrl?cursorId=${session("nextCursor").as[String]}")
         .header("Content-Type", "application/json")
         .header("Authorization", s"$token")
         .header("CorrelationId", "f926f232-36fa-431c-a196-fcc3e5736f0d")
+        .header("gov-uk-originator-id", OriginatorId(requestType))
         .check(status.is(200))
     )
 
+  def getOriginatorId(requestType: String): Option[String] = {
+    requestType match {
+      case "MA" => Some("originatorIdMa")
+      case "BSP" => Some("originatorIdBsp")
+      case "GYSP" => Some("originatorIdGysp")
+      case "ESA" => Some("originatorIdEsa")
+      case "JSA" => Some("originatorIdJsa")
+      case "SEARCHLIGHT" => Some("originatorIdBspSearchlight")
+      case _ => None
+    }
+  }
 }
