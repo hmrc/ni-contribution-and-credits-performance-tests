@@ -38,7 +38,7 @@ object Scenarios {
   // BSP: 1
   // GYSP: 2
 
-  def jsaBenefitEligibilityDataJourney(smokeTest: Boolean): ScenarioDefinition = {
+  def jsaBenefitEligibilityDataJourney(): ScenarioDefinition = {
     val load = 1
     val benefitEligibilityData = scenario("Fetch JSA and return")
       .exec(
@@ -47,7 +47,7 @@ object Scenarios {
     ScenarioDefinition(benefitEligibilityData, load)
   }
 
-  def esaBenefitEligibilityDataJourney(smokeTest: Boolean): ScenarioDefinition = {
+  def esaBenefitEligibilityDataJourney(): ScenarioDefinition = {
     val load = 7
     val benefitEligibilityData = scenario("Fetch ESA and return")
       .exec(
@@ -56,7 +56,7 @@ object Scenarios {
     ScenarioDefinition(benefitEligibilityData, load)
   }
 
-  def maBenefitEligibilityDataJourney(smokeTest: Boolean): ScenarioDefinition = {
+  def maBenefitEligibilityDataJourney(): ScenarioDefinition = {
     val load = 1
     val benefitEligibilityData = scenario("Fetch MA and return")
       .exec(
@@ -65,7 +65,7 @@ object Scenarios {
     ScenarioDefinition(benefitEligibilityData, load)
   }
 
-  def bspBenefitEligibilityDataJourney(smokeTest: Boolean): ScenarioDefinition = {
+  def bspBenefitEligibilityDataJourney(): ScenarioDefinition = {
     val load = 1
     val benefitEligibilityData = scenario("Fetch BSP and return")
       .exec(
@@ -74,7 +74,7 @@ object Scenarios {
     ScenarioDefinition(benefitEligibilityData, load)
   }
 
-  def gyspBenefitEligibilityDataJourney(smokeTest: Boolean): ScenarioDefinition = {
+  def gyspBenefitEligibilityDataJourney(): ScenarioDefinition = {
     val load = 2
     val benefitEligibilityData = scenario("Fetch GYSP and return")
       .exec(
@@ -83,7 +83,7 @@ object Scenarios {
     ScenarioDefinition(benefitEligibilityData, load)
   }
 
-  def searchlightBenefitEligibilityDataJourney(smokeTest: Boolean): ScenarioDefinition = {
+  def searchlightBenefitEligibilityDataJourney(): ScenarioDefinition = {
     val load = 7
     val benefitEligibilityData = scenario("Fetch SEARCHLIGHT and return")
       .exec(
@@ -92,7 +92,7 @@ object Scenarios {
     ScenarioDefinition(benefitEligibilityData, load)
   }
 
-  def underLoadBenefitEligibilityDataJourney(smokeTest: Boolean): List[ScenarioDefinition] = {
+  def underLoadBenefitEligibilityDataJourney(): List[ScenarioDefinition] = {
     // Note: These loads represent triple the systems standard load to stress the system
     val esaload        = 21
     val jsaload        = 3
@@ -135,7 +135,7 @@ object Scenarios {
     )
   }
 
-  def bspBenefitEligibilityDataPaginationJourney(smokeTest: Boolean): ScenarioDefinition = {
+  def bspBenefitEligibilityDataPaginationJourney(): ScenarioDefinition = {
     val load = 1
     val benefitEligibilityData = scenario("Fetch BSP pagination and return")
       .exec(
@@ -144,7 +144,7 @@ object Scenarios {
     ScenarioDefinition(benefitEligibilityData, load)
   }
 
-  def gyspBenefitEligibilityDataPaginationJourney(smokeTest: Boolean): ScenarioDefinition = {
+  def gyspBenefitEligibilityDataPaginationJourney(): ScenarioDefinition = {
     val load = 2
     val benefitEligibilityData = scenario("Fetch GYSP pagination and return")
       .exec(
@@ -153,7 +153,7 @@ object Scenarios {
     ScenarioDefinition(benefitEligibilityData, load)
   }
 
-  def maBenefitEligibilityDataPaginationJourney(smokeTest: Boolean): ScenarioDefinition = {
+  def maBenefitEligibilityDataPaginationJourney(): ScenarioDefinition = {
     val load = 1
     val benefitEligibilityData = scenario("Fetch MA pagination and return")
       .exec(
@@ -162,7 +162,7 @@ object Scenarios {
     ScenarioDefinition(benefitEligibilityData, load)
   }
 
-  def paginationBenefitEligibilityDataUnderLoadJourney(smokeTest: Boolean): List[ScenarioDefinition] = {
+  def paginationBenefitEligibilityDataUnderLoadJourney(): List[ScenarioDefinition] = {
     // Note: These loads represent triple the systems standard load to stress the system
     val maload   = 3
     val bspload  = 3
@@ -187,7 +187,7 @@ object Scenarios {
   }
 
   // old BSP scenario definition
-  def niccJourney(smokeTest: Boolean): ScenarioDefinition = {
+  def niccJourney(): ScenarioDefinition = {
     val load = 1
     val nicc = scenario("Retrieve niContribution,niCredit for ni number , Start tax year Date and End tax year Date")
       .exec(

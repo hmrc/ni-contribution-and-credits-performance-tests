@@ -180,4 +180,5 @@ object BenefitEligibilityDataRequests extends ServicesConfiguration {
         .header("CorrelationId", "f926f232-36fa-431c-a196-fcc3e5736f0d")
         .check(status.is(200))
     )
+
 }
