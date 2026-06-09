@@ -25,21 +25,21 @@ class ApiUsageSimulation extends Simulation with JourneySetup {
 
   val benefitEligibilityApiScenarioDefinitions: Seq[ScenarioDefinition] =
     Seq(
-      Scenarios.jsaBenefitEligibilityDataJourney(runSingleUserJourney),
-      Scenarios.esaBenefitEligibilityDataJourney(runSingleUserJourney),
-      Scenarios.maBenefitEligibilityDataJourney(runSingleUserJourney),
-      Scenarios.bspBenefitEligibilityDataJourney(runSingleUserJourney),
-      Scenarios.gyspBenefitEligibilityDataJourney(runSingleUserJourney),
-      Scenarios.searchlightBenefitEligibilityDataJourney(runSingleUserJourney),
-      Scenarios.bspBenefitEligibilityDataPaginationJourney(runSingleUserJourney),
-      Scenarios.gyspBenefitEligibilityDataPaginationJourney(runSingleUserJourney),
-      Scenarios.maBenefitEligibilityDataPaginationJourney(runSingleUserJourney)
-    ) ++ Scenarios.paginationBenefitEligibilityDataUnderLoadJourney(runSingleUserJourney) ++ Scenarios
-      .underLoadBenefitEligibilityDataJourney(runSingleUserJourney)
+      Scenarios.jsaBenefitEligibilityDataJourney(),
+      Scenarios.esaBenefitEligibilityDataJourney(),
+      Scenarios.maBenefitEligibilityDataJourney(),
+      Scenarios.bspBenefitEligibilityDataJourney(),
+      Scenarios.gyspBenefitEligibilityDataJourney(),
+      Scenarios.searchlightBenefitEligibilityDataJourney(),
+      Scenarios.bspBenefitEligibilityDataPaginationJourney(),
+      Scenarios.gyspBenefitEligibilityDataPaginationJourney(),
+      Scenarios.maBenefitEligibilityDataPaginationJourney()
+    ) ++ Scenarios.paginationBenefitEligibilityDataUnderLoadJourney() ++ Scenarios
+      .underLoadBenefitEligibilityDataJourney()
 
   val niccScenarioDefinitions: Seq[ScenarioDefinition] =
     Seq(
-      Scenarios.niccJourney(runSingleUserJourney)
+      Scenarios.niccJourney()
     )
 
   println("Setting up simulation")
