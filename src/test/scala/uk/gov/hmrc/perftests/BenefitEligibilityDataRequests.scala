@@ -158,7 +158,6 @@ object BenefitEligibilityDataRequests extends ServicesConfiguration {
         .header("Content-Type", "application/json")
         .header("Authorization", s"$token")
         .header("CorrelationId", "eba473d1-c34b-498d-925f-af8d2514fa92")
-        .header("gov-uk-originator-id", getOriginatorId(requestType))
         .body(StringBody(request))
         .check(status.is(200))
     )
@@ -170,7 +169,6 @@ object BenefitEligibilityDataRequests extends ServicesConfiguration {
         .header("Content-Type", "application/json")
         .header("Authorization", s"$token")
         .header("CorrelationId", "47205584-6403-47c0-97ab-88e9e115a58e")
-        .header("gov-uk-originator-id", getOriginatorId(requestType))
         .body(StringBody(request))
         .check(status.is(200))
         .check(jsonPath("$.nextCursor").saveAs("nextCursor"))
@@ -180,19 +178,6 @@ object BenefitEligibilityDataRequests extends ServicesConfiguration {
         .header("Content-Type", "application/json")
         .header("Authorization", s"$token")
         .header("CorrelationId", "f926f232-36fa-431c-a196-fcc3e5736f0d")
-        .header("gov-uk-originator-id", getOriginatorId(requestType))
         .check(status.is(200))
     )
-
-  def getOriginatorId(requestType: String): String = {
-    (requestType match {
-      case "MA" => Some("originatorIdMa")
-      case "BSP" => Some("originatorIdBsp")
-      case "GYSP" => Some("originatorIdGysp")
-      case "ESA" => Some("originatorIdEsa")
-      case "JSA" => Some("originatorIdJsa")
-      case "SEARCHLIGHT" => Some("originatorIdBspSearchlight")
-      case _ => None
-    }).getOrElse("N/A")
-  }
 }
